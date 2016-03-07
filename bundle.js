@@ -26727,6 +26727,17 @@
 	          React.createElement("div", { className: "volume-cursor1" })
 	        ),
 	        React.createElement("div", { className: "volume-cursor2" })
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "help" },
+	        "Help"
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "onoffswitch" },
+	        React.createElement("input", { type: "checkbox", name: "onoffswitch", className: "onoffswitch-checkbox", id: "myonoffswitch", defaultChecked: true }),
+	        React.createElement("label", { className: "onoffswitch-label", "for": "myonoffswitch" })
 	      )
 	    );
 	  }

@@ -76,6 +76,7 @@ table {
   height: 120px;
   width: 120px;
   margin: 10px;
+	cursor: pointer;
 }
 
 .infos-box {
@@ -90,6 +91,7 @@ table {
   border: 2px black solid;
   margin: 20px;
   height: 60px;
+	cursor: pointer;
 }
 
 .volumes-container-fuck-red {
@@ -100,7 +102,7 @@ table {
 	/*border: red 1px solid;*/
 	/*position: relative;
 	top: 40px;*/
-	margin-top: 50%;
+	margin-top: 40%;
 }
 
 .volume-cursor1 {
@@ -111,6 +113,7 @@ table {
   padding: 30px;
   width: 5px;
   height: 5px;
+	cursor: pointer;
 }
 
 .volume-cursor2 {
@@ -122,6 +125,7 @@ table {
   width: 5px;
   height: 5px;
   margin-top: 20px;
+	cursor: pointer;
 }
 
 
@@ -204,4 +208,53 @@ table {
 	margin: 20px;
 	position: relative;
 	bottom: 50px;
+}
+
+/* Help mini slider */
+
+.onoffswitch {
+    position: relative;
+		width: 52px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 45px;
+		margin-bottom: 10px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 10px; padding: 0; line-height: 10px;
+    border: 0px solid #FFFFFF; border-radius: 26px;
+    background-color: #9E9E9E;
+}
+.onoffswitch-label:before {
+    content: "";
+    display: block; width: 26px; margin: -8px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 35px;
+    border-radius: 26px;
+    box-shadow: 0 6px 12px 0px #757575;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #E8E7D0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color: #E8E7D0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px;
+    background-color: #2F57AD;
+    box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+}
+
+.help {
+	position: relative;
+	top: 50px;
 }
