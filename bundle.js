@@ -54,10 +54,12 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'page-container' },
 	      'Header',
 	      React.createElement(MpbBox, null),
-	      'Music Sheets Footer'
+	      'Music Sheets',
+	      React.createElement('br', null),
+	      'Footer'
 	    );
 	  }
 	});
@@ -19673,6 +19675,7 @@
 
 	var React = __webpack_require__(1);
 	var Pads = __webpack_require__(160);
+	var MpbInfos = __webpack_require__(188);
 	
 	var MpbBox = React.createClass({
 	  displayName: 'MpbBox',
@@ -19680,8 +19683,8 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
-	      'Mpb Header',
+	      { className: 'mpc-container' },
+	      React.createElement(MpbInfos, null),
 	      React.createElement(Pads, null)
 	    );
 	  }
@@ -19694,8 +19697,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
-	    SinglePad = __webpack_require__(185),
-	    TONES = __webpack_require__(161),
+	    SinglePad = __webpack_require__(161),
+	    TONES = __webpack_require__(186),
 	    KeyStore = __webpack_require__(162);
 	
 	var Pads = React.createClass({
@@ -19714,10 +19717,14 @@
 	
 	    return React.createElement(
 	      'div',
-	      null,
-	      Object.keys(TONES).map(function (noteName) {
-	        return React.createElement(SinglePad, { noteName: noteName, key: noteName });
-	      })
+	      { className: 'pads-container' },
+	      React.createElement(
+	        'div',
+	        { className: 'under-pads-container' },
+	        Object.keys(TONES).map(function (noteName) {
+	          return React.createElement(SinglePad, { noteName: noteName, key: noteName });
+	        })
+	      )
 	    );
 	  }
 	});
@@ -19726,20 +19733,55 @@
 
 /***/ },
 /* 161 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	var TONES = {
-	  C5: 523.25,
-	  D5: 587.33,
-	  E5: 659.25,
-	  F5: 698.46,
-	  G5: 783.99,
-	  A5: 880.00,
-	  B5: 987.77,
-	  C6: 1046.50
-	};
+	var React = __webpack_require__(1);
+	var KeyStore = __webpack_require__(162);
+	var Note = __webpack_require__(185);
+	var TONES = __webpack_require__(186);
 	
-	module.exports = TONES;
+	var SinglePad = React.createClass({
+	  displayName: 'SinglePad',
+	
+	  componentDidMount: function () {
+	    this.note = new Note(TONES[this.props.noteName]);
+	    KeyStore.addListener(this._onChange);
+	  },
+	
+	  getInitialState: function () {
+	    return { pressed: this.thisKeyPressed() };
+	  },
+	
+	  thisKeyPressed: function () {
+	    var keys = KeyStore.all();
+	    return keys.indexOf(this.props.noteName) !== -1;
+	  },
+	
+	  _onChange: function () {
+	    var pressed = this.thisKeyPressed();
+	    if (pressed) {
+	      this.note.start();
+	    } else {
+	      this.note.stop();
+	    }
+	    this.setState({ pressed: pressed });
+	  },
+	
+	  render: function () {
+	    var className = "note-key";
+	    if (this.state.pressed) {
+	      className += " pressed";
+	    }
+	
+	    return React.createElement(
+	      'div',
+	      { className: className },
+	      this.props.noteName
+	    );
+	  }
+	});
+	
+	module.exports = SinglePad;
 
 /***/ },
 /* 162 */
@@ -26561,19 +26603,141 @@
 
 /***/ },
 /* 185 */
+/***/ function(module, exports) {
+
+	var ctx = new (window.AudioContext || window.webkitAudioContext)();
+	
+	var createOscillator = function (freq) {
+	  var osc = ctx.createOscillator();
+	  osc.type = "sine";
+	  osc.frequency.value = freq;
+	  osc.detune.value = 0;
+	  osc.start(ctx.currentTime);
+	  return osc;
+	};
+	
+	var createGainNode = function () {
+	  var gainNode = ctx.createGain();
+	  gainNode.gain.value = 0;
+	  gainNode.connect(ctx.destination);
+	  return gainNode;
+	};
+	
+	var Note = function (freq) {
+	  this.oscillatorNode = createOscillator(freq);
+	  this.gainNode = createGainNode();
+	  this.oscillatorNode.connect(this.gainNode);
+	};
+	
+	Note.prototype = {
+	  start: function () {
+	    // can't explain 0.3, it is a reasonable value
+	    this.gainNode.gain.value = 0.3;
+	  },
+	
+	  stop: function () {
+	    this.gainNode.gain.value = 0;
+	  }
+	};
+	
+	module.exports = Note;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports) {
+
+	var TONES = {
+	  Q: 523.25,
+	  W: 587.33,
+	  E: 659.25,
+	  A: 698.46,
+	  S: 783.99,
+	  D: 880.00,
+	  Z: 987.77,
+	  X: 1046.50,
+	  C: 1174.66
+	};
+	
+	module.exports = TONES;
+
+/***/ },
+/* 187 */,
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var Screen = __webpack_require__(189);
+	var Volumes = __webpack_require__(190);
+	
+	var MpbInfos = React.createClass({
+	  displayName: 'MpbInfos',
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'infos-box' },
+	      React.createElement(Screen, null),
+	      React.createElement(Volumes, null)
+	    );
+	  }
+	});
+	
+	module.exports = MpbInfos;
+
+/***/ },
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	
-	var SinglePad = React.createClass({
-	  displayName: 'SinglePad',
+	var Screen = React.createClass({
+	  displayName: "Screen",
 	
 	  render: function () {
-	    return React.createElement('div', null);
+	    return React.createElement(
+	      "div",
+	      { className: "screen" },
+	      "screen"
+	    );
 	  }
 	});
 	
-	module.exports = SinglePad;
+	module.exports = Screen;
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Volume = React.createClass({
+	  displayName: "Volume",
+	
+	  render: function () {
+	    return React.createElement(
+	      "section",
+	      { className: "volumes-container-fuck-red" },
+	      React.createElement(
+	        "div",
+	        { id: "chuck-norris" },
+	        "paf",
+	        React.createElement(
+	          "div",
+	          { className: "volume-cursor1" },
+	          "yo"
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "volume-cursor2" },
+	          "yo"
+	        )
+	      ),
+	      "paf"
+	    );
+	  }
+	});
+	
+	module.exports = Volume;
 
 /***/ }
 /******/ ]);

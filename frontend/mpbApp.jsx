@@ -5,10 +5,11 @@ var MpbBox = require('./components/mpbBox');
 var App = React.createClass({
   render: function () {
     return(
-      <div>
+      <div className="page-container">
         Header
         <MpbBox/>
         Music Sheets
+        <br></br>
         Footer
       </div>
     );

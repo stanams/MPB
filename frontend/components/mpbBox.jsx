@@ -1,11 +1,12 @@
 var React = require('react');
 var Pads = require('./pads');
+var MpbInfos = require('./mpbInfos');
 
 var MpbBox = React.createClass({
   render: function(){
     return(
-      <div>
-        Mpb Header
+      <div className="mpc-container">
+        <MpbInfos/>
         <Pads/>
       </div>
     );

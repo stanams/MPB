@@ -1,7 +1,7 @@
 var React = require('react'),
     SinglePad = require('../components/SinglePad'),
     TONES = require("../constants/tones"),
-    KeyStore = require('../stores/KeyStore');
+    KeyStore = require('../stores/keyStore');
 
 
 var Pads = React.createClass({
@@ -17,12 +17,14 @@ var Pads = React.createClass({
   render: function(){
 
     return(
-      <div>
-        {
-           Object.keys(TONES).map(function (noteName) {
-             return (<SinglePad noteName={noteName} key={noteName}/>);
-           })
-         }
+      <div className="pads-container">
+        <div className="under-pads-container">
+          {
+             Object.keys(TONES).map(function (noteName) {
+               return (<SinglePad noteName={noteName} key={noteName}/>);
+             })
+           }
+       </div>
       </div>
     );
   }
