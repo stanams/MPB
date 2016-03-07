@@ -26718,21 +26718,16 @@
 	      "section",
 	      { className: "volumes-container-fuck-red" },
 	      React.createElement(
-	        "div",
+	        "section",
 	        { id: "chuck-norris" },
-	        "paf",
+	        React.createElement("div", { id: "volume-slider" }),
 	        React.createElement(
-	          "div",
-	          { className: "volume-cursor1" },
-	          "yo"
+	          "i",
+	          { className: "fa fa-spinner fa-5x" },
+	          React.createElement("div", { className: "volume-cursor1" })
 	        ),
-	        React.createElement(
-	          "div",
-	          { className: "volume-cursor2" },
-	          "yo"
-	        )
-	      ),
-	      "paf"
+	        React.createElement("div", { className: "volume-cursor2" })
+	      )
 	    );
 	  }
 	});

@@ -4,16 +4,21 @@ var Volume = React.createClass({
   render: function(){
     return(
       <section className="volumes-container-fuck-red">
-        <div id="chuck-norris">
-          paf
-          <div className="volume-cursor1">
-  yo
+        <section id="chuck-norris">
+
+          <div id="volume-slider">
+
           </div>
+          <i className="fa fa-spinner fa-5x">
+            <div className="volume-cursor1">
+
+            </div>
+          </i>
           <div className="volume-cursor2">
-  yo
+
           </div>
-        </div>
-        paf
+        </section>
+
       </section>
     );
   }

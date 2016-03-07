@@ -1,3 +1,5 @@
+/*-----------------RESET CSS-------------------*/
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -42,8 +44,9 @@ table {
 	border-spacing: 0;
 }
 
-.page-container {
+/*-----------------CUSTOM CSS-------------------*/
 
+.page-container {
   height: 100%;
   width: 100%;
 }
@@ -94,7 +97,10 @@ table {
 }
 
 #chuck-norris {
-	border: red 1px solid;
+	/*border: red 1px solid;*/
+	/*position: relative;
+	top: 40px;*/
+	margin-top: 50%;
 }
 
 .volume-cursor1 {
@@ -116,4 +122,86 @@ table {
   width: 5px;
   height: 5px;
   margin-top: 20px;
+}
+
+
+/*Possible volume slider*/
+
+/*#player-volume-wrapper {
+    background: rgb(17, 17, 17);
+    background: -webkit-gradient(radial, center center, 0, center center, 40%,
+    	from(rgba(100, 100, 100,0.5)), to(rgba(17, 17, 17,0))) no-repeat
+    	url(http://iviewsource.com/exercises/audioslider/images/backgroundpattern.png),
+    	rgb(17, 17, 17);
+    background: -webkit-radial-gradient(rgba(100, 100, 100,0.5),
+    	rgba(17, 17, 17,0) 40%) no-repeat,
+    	url(http://iviewsource.com/exercises/audioslider/images/backgroundpattern.png),
+    	rgb(17, 17, 17);
+    background: -moz-radial-gradient(rgba(100, 100, 100,0.5),
+    	rgba(17, 17, 17,0) 40%) no-repeat,
+    	url(http://iviewsource.com/exercises/audioslider/images/backgroundpattern.png),
+    	rgb(17, 17, 17);
+    background: -ms-radial-gradient(rgba(100, 100, 100,0.5),
+    	rgba(17, 17, 17,0) 40%) no-repeat,
+    	url(http://iviewsource.com/exercises/audioslider/images/backgroundpattern.png),
+    	rgb(17, 17, 17);
+    background: -o-radial-gradient(rgba(100, 100, 100,0.5),
+    	rgba(17, 17, 17,0) 40%) no-repeat,
+    	url(http://iviewsource.com/exercises/audioslider/images/backgroundpattern.png),
+    	rgb(17, 17, 17);
+    background: radial-gradient(rgba(100, 100, 100,0.5),
+    	rgba(17, 17, 17,0) 40%) no-repeat,
+    url(http://iviewsource.com/exercises/audioslider/images/backgroundpattern.png),
+    rgb(17, 17, 17);
+}
+
+#player {
+    width: 350px;
+    height: 50px;
+    position: relative;
+    margin: 0 auto;
+    top: 150px;
+    background: url('http://iviewsource.com/exercises/audioslider/images/volume-background.png') no-repeat left top;
+}
+
+#volume-slider {
+    position: absolute;
+    left: 24px;
+    margin: 0 auto;
+    height:15px;
+    width: 300px;
+    background: url('http://iviewsource.com/exercises/audioslider/images/volume-empty.png') no-repeat left top;
+  border: none;
+  outline: none;
+}
+
+#volume-slider .ui-slider-range-min {
+    height:15px;
+    width: 300px;
+    position: absolute;
+    background: url('http://iviewsource.com/exercises/audioslider/images/volume-full.png') no-repeat left top;
+  border: none;
+  outline: none;
+}
+
+#volume-slider .ui-slider-handle {
+    width: 38px;
+    height:39px;
+    background: url('http://iviewsource.com/exercises/audioslider/images/volume-knob.png') no-repeat left top;
+    position: absolute;
+    margin-left: -15px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}*/
+
+
+#volume-slider {
+	width: 200px;
+	height: 1px;
+	border: 10px black solid;
+	border: 3px black solid;
+	margin: 20px;
+	position: relative;
+	bottom: 50px;
 }
