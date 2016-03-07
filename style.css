@@ -103,6 +103,11 @@ table {
 	left: 10px;
 	margin: 3px;
 	padding: 3px;
+	border-bottom: 3px #A9A9A9 solid;
+}
+
+.container-single-pad:active {
+	border-bottom: 3px #313133 solid;
 }
 
 .note-key {
