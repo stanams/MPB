@@ -19775,8 +19775,14 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: className },
-	      this.props.noteName
+	      { className: 'container-single-pad' },
+	      React.createElement(
+	        'div',
+	        { onKeyPress: this.handleKeyPress,
+	          className: className },
+	        React.createElement('div', { className: 'lightening-dot' }),
+	        this.props.noteName
+	      )
 	    );
 	  }
 	});
@@ -26697,7 +26703,11 @@
 	    return React.createElement(
 	      "div",
 	      { className: "screen" },
-	      "screen"
+	      React.createElement(
+	        "p",
+	        { className: "screen-text" },
+	        "REC"
+	      )
 	    );
 	  }
 	});

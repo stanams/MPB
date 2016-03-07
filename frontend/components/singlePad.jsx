@@ -34,7 +34,15 @@ var SinglePad = React.createClass({
      className += " pressed";
     }
 
-   return <div className={className}>{this.props.noteName}</div>;
+   return (
+     <div className="container-single-pad">
+       <div onKeyPress={this.handleKeyPress}
+            className={className}>
+         <div className="lightening-dot"></div>
+         {this.props.noteName}
+       </div>
+     </div>
+   );
   }
 });
 
