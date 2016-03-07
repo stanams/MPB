@@ -1,7 +1,7 @@
 var path = require('path');
 module.exports = {
   context: __dirname,
-  entry: 'mpb.jsx',
+  entry: path.join(__dirname, 'frontend', 'mpb.jsx'),
   output: {
     path: "./",
     filename: "bundle.js"
