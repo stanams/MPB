@@ -26681,9 +26681,13 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'infos-box' },
-	      React.createElement(Screen, null),
-	      React.createElement(Volumes, null)
+	      { className: 'infos-box-wrapper' },
+	      React.createElement(
+	        'div',
+	        { className: 'infos-box' },
+	        React.createElement(Screen, null),
+	        React.createElement(Volumes, null)
+	      )
 	    );
 	  }
 	});
