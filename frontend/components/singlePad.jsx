@@ -5,7 +5,7 @@ var TONES = require('../constants/tones');
 
 var SinglePad = React.createClass({
   getInitialState: function () {
-    return { pressed: this.thisKeyPressed() };
+    return { pressed: this.handleKeyPressed() };
   },
 
   componentDidMount: function () {
@@ -14,23 +14,23 @@ var SinglePad = React.createClass({
  },
 
   componentWillUnmount: function () {
-    KeyStore.removeEventListener();
+    KeyStore.remove();
   },
 
- thisKeyPressed: function () {
-   var keys = KeyStore.all();
-   return keys.indexOf(this.props.noteName) !== -1;
- },
+  handleKeyPressed: function () {
+    var keys = KeyStore.all();
+    return keys.indexOf(this.props.noteName) !== -1;
+  },
 
- _onChange: function () {
-   var pressed = this.thisKeyPressed();
+  _onChange: function () {
+   var pressed = this.handleKeyPressed();
    if (pressed) {
      this.note.start();
    } else {
      this.note.stop();
    }
    this.setState({ pressed: pressed });
- },
+  },
 
   render: function(){
     var className = "note-key";
@@ -40,8 +40,7 @@ var SinglePad = React.createClass({
 
    return (
      <div className="container-single-pad">
-       <div onKeyPress={this.handleKeyPress}
-            className={className}>
+       <div className={className}>
          <div className="lightening-dot"></div>
          {this.props.noteName}
        </div>

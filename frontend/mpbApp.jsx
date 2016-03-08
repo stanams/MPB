@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var MpbBox = require('./components/mpbBox');
+var KeyListener = require('./util/keyListener');
 
 
 var App = React.createClass({

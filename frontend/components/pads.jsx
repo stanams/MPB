@@ -10,20 +10,26 @@ var Pads = React.createClass({
     KeyStore.addListener(this._onChange);
   },
 
+  componentWillUnmount: function () {
+    KeyStore.remove();
+  },
+
   getInitialState: function () {
     return { notes: KeyStore.all() };
   },
 
-  render: function(){
+  _onChange: function () {
+    this.setState({notes: KeyStore.all()});
+  },
 
+  render: function(){
+    var pads = Object.keys(TONES).map(function (noteName) {
+      return (<SinglePad noteName={noteName} key={noteName}/>);
+    });
     return(
       <div className="pads-container">
         <div className="under-pads-container">
-          {
-             Object.keys(TONES).map(function (noteName) {
-               return (<SinglePad noteName={noteName} key={noteName}/>);
-             })
-           }
+          {pads}
        </div>
       </div>
     );

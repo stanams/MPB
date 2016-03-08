@@ -15,25 +15,14 @@ var MAPPING = {
     67: 'C'
   }
 
-  function KeyListener() {
-    register();
-  }
+$(function() {
+  $(document).on("keydown", function(e) {
+    var key = MAPPING[e.keyCode.toString()];
+    KeyActions.keyPressed(key);
+  });
 
-  function register() {
-    $(document).on("keydown", handleKeyDown);
-    $(document).on("keyup", handleKeyUp);
-  }
-
-  function handleKeyDown(event) {
-    var noteName = MAPPING[event.keyCode];
-    if (noteName) {
-      KeyActions.keyPressed(noteName);
-    }
-  }
-
-  function handleKeyUp(event) {
-    var noteName = MAPPING[event.keyCode];
-    if (noteName){
-      KeyActions.keyReleased(noteName);
-    }
-  }
+  $(document).on("keyup", function(e) {
+    var key = MAPPING[e.keyCode.toString()];
+    KeyActions.keyReleased(key);
+  });
+});
