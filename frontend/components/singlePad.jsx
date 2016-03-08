@@ -4,14 +4,18 @@ var Note = require('../util/samples');
 var TONES = require('../constants/tones');
 
 var SinglePad = React.createClass({
+  getInitialState: function () {
+    return { pressed: this.thisKeyPressed() };
+  },
+
   componentDidMount: function () {
    this.note = new Note(TONES[this.props.noteName]);
    KeyStore.addListener(this._onChange);
  },
 
-  getInitialState: function () {
-   return { pressed: this.thisKeyPressed() };
- },
+  componentWillUnmount: function () {
+    KeyStore.removeEventListener();
+  },
 
  thisKeyPressed: function () {
    var keys = KeyStore.all();
@@ -30,9 +34,9 @@ var SinglePad = React.createClass({
 
   render: function(){
     var className = "note-key";
-    if(this.state.pressed){
-     className += " pressed";
-    }
+    // if(this.state.pressed){
+    //  className += " pressed";
+    // }
 
    return (
      <div className="container-single-pad">
@@ -47,3 +51,5 @@ var SinglePad = React.createClass({
 });
 
 module.exports = SinglePad;
+window.Note = Note;
+// window.snd = snd;

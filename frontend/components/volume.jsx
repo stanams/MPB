@@ -18,13 +18,15 @@ var Volume = React.createClass({
 
           </div>
         </section>
-          <div className="help">
-            Help
-          </div>
+        <div className="help-wrapper">
           <div className="onoffswitch">
             <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox" id="myonoffswitch" defaultChecked/>
-            <label className="onoffswitch-label" for="myonoffswitch"></label>
+            <label className="onoffswitch-label" htmlFor="myonoffswitch"></label>
           </div>
+          <div className="help">
+            <p className="help-section">Help</p>
+          </div>
+        </div>
       </section>
     );
   }

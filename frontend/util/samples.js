@@ -22,6 +22,11 @@ var Note = function (freq) {
   this.oscillatorNode.connect(this.gainNode);
 };
 
+// var snd = function(){
+//   new Audio("../../samples_list/aerosmith-walkthisway-107.4bpm.wav"); // buffers automatically when created
+//   snd.play();
+// }
+
 Note.prototype = {
   start: function () {
     // can't explain 0.3, it is a reasonable value

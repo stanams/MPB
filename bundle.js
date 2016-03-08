@@ -19675,7 +19675,7 @@
 
 	var React = __webpack_require__(1);
 	var Pads = __webpack_require__(160);
-	var MpbInfos = __webpack_require__(188);
+	var MpbInfos = __webpack_require__(187);
 	
 	var MpbBox = React.createClass({
 	  displayName: 'MpbBox',
@@ -19743,13 +19743,17 @@
 	var SinglePad = React.createClass({
 	  displayName: 'SinglePad',
 	
+	  getInitialState: function () {
+	    return { pressed: this.thisKeyPressed() };
+	  },
+	
 	  componentDidMount: function () {
 	    this.note = new Note(TONES[this.props.noteName]);
 	    KeyStore.addListener(this._onChange);
 	  },
 	
-	  getInitialState: function () {
-	    return { pressed: this.thisKeyPressed() };
+	  componentWillUnmount: function () {
+	    KeyStore.removeEventListener();
 	  },
 	
 	  thisKeyPressed: function () {
@@ -19769,9 +19773,9 @@
 	
 	  render: function () {
 	    var className = "note-key";
-	    if (this.state.pressed) {
-	      className += " pressed";
-	    }
+	    // if(this.state.pressed){
+	    //  className += " pressed";
+	    // }
 	
 	    return React.createElement(
 	      'div',
@@ -19788,6 +19792,8 @@
 	});
 	
 	module.exports = SinglePad;
+	window.Note = Note;
+	// window.snd = snd;
 
 /***/ },
 /* 162 */
@@ -19801,17 +19807,6 @@
 	
 	KeyStore.all = function () {
 	  return _keys.slice(0);
-	};
-	
-	KeyStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case mbpConstants.KEY_PRESSED:
-	      KeyStore._addKey(payload.note);
-	      break;
-	    case mbpConstants.KEY_RELEASED:
-	      KeyStore._removeKey(payload.note);
-	      break;
-	  }
 	};
 	
 	KeyStore._addKey = function (key) {
@@ -19832,6 +19827,20 @@
 	  if (idx != -1) {
 	    _keys.splice(idx, 1);
 	    this.__emitChange();
+	  }
+	};
+	
+	KeyStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case mbpConstants.KEY_PRESSED:
+	      KeyStore._addKey(payload.note);
+	      break;
+	    case mbpConstants.KEY_RELEASED:
+	      KeyStore._removeKey(payload.note);
+	      break;
+	    case OrganConstants.GROUP_UPDATE:
+	      KeyStore._groupUpdate(payload.notes);
+	      break;
 	  }
 	};
 	
@@ -26344,7 +26353,8 @@
 
 	module.exports = {
 	  KEY_PRESSED: "KEY_PRESSED",
-	  KEY_RELEASED: "KEY_RELEASED"
+	  KEY_RELEASED: "KEY_RELEASED",
+	  GROUP_UPDATE: "GROUP_UPDATE"
 	};
 
 /***/ },
@@ -26635,6 +26645,11 @@
 	  this.oscillatorNode.connect(this.gainNode);
 	};
 	
+	// var snd = function(){
+	//   new Audio("../../samples_list/aerosmith-walkthisway-107.4bpm.wav"); // buffers automatically when created
+	//   snd.play();
+	// }
+	
 	Note.prototype = {
 	  start: function () {
 	    // can't explain 0.3, it is a reasonable value
@@ -26667,13 +26682,12 @@
 	module.exports = TONES;
 
 /***/ },
-/* 187 */,
-/* 188 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var Screen = __webpack_require__(189);
-	var Volumes = __webpack_require__(190);
+	var Screen = __webpack_require__(188);
+	var Volumes = __webpack_require__(189);
 	
 	var MpbInfos = React.createClass({
 	  displayName: 'MpbInfos',
@@ -26695,7 +26709,7 @@
 	module.exports = MpbInfos;
 
 /***/ },
-/* 189 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -26719,7 +26733,7 @@
 	module.exports = Screen;
 
 /***/ },
-/* 190 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -26744,14 +26758,22 @@
 	      ),
 	      React.createElement(
 	        "div",
-	        { className: "help" },
-	        "Help"
-	      ),
-	      React.createElement(
-	        "div",
-	        { className: "onoffswitch" },
-	        React.createElement("input", { type: "checkbox", name: "onoffswitch", className: "onoffswitch-checkbox", id: "myonoffswitch", defaultChecked: true }),
-	        React.createElement("label", { className: "onoffswitch-label", "for": "myonoffswitch" })
+	        { className: "help-wrapper" },
+	        React.createElement(
+	          "div",
+	          { className: "onoffswitch" },
+	          React.createElement("input", { type: "checkbox", name: "onoffswitch", className: "onoffswitch-checkbox", id: "myonoffswitch", defaultChecked: true }),
+	          React.createElement("label", { className: "onoffswitch-label", htmlFor: "myonoffswitch" })
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "help" },
+	          React.createElement(
+	            "p",
+	            { className: "help-section" },
+	            "Help"
+	          )
+	        )
 	      )
 	    );
 	  }

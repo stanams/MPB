@@ -147,7 +147,6 @@ table {
 
 .infos-box {
   float: right;
-  border: 2px black solid;
   width: 200px;
   height: 400px;
   margin: 30px;
@@ -346,9 +345,20 @@ table {
     box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
 }
 
+.help-wrapper {
+	display: block;
+}
+
 .help {
 	position: relative;
 	top: 50px;
+}
+
+.help-section {
+	position: relative;
+	left: 85px;
+	font-family: Poppins;
+	font-size: 12px;
 }
 
 .lightening-dot {
