@@ -19771,7 +19771,14 @@
 	    return keys.indexOf(this.props.noteName) !== -1;
 	  },
 	
+	  // handleClick: function () {
+	  //   var keys = KeyStore.all();
+	  //   return keys.indexOf(this.props.noteName) !== -1;
+	  // },
+	
 	  _onChange: function () {
+	    // var clicked = this.handleClick();
+	
 	    var pressed = this.handleKeyPressed();
 	    if (pressed) {
 	      this.note.start();
@@ -19782,18 +19789,16 @@
 	  },
 	
 	  render: function () {
-	    var className = "note-key";
-	    // if(this.state.pressed){
-	    //  className += " pressed";
-	    // }
-	
+	    var classNameNote = this.state.pressed ? "note-key-pressed" : "note-key";
+	    var classNameDot = this.state.pressed ? "lightening-dot-pressed" : "lightening-dot";
+	    var classNameContainer = this.state.pressed ? "container-single-pad-pressed" : "container-single-pad";
 	    return React.createElement(
 	      'div',
-	      { className: 'container-single-pad' },
+	      { className: classNameContainer },
 	      React.createElement(
 	        'div',
-	        { className: className },
-	        React.createElement('div', { className: 'lightening-dot' }),
+	        { className: classNameNote },
+	        React.createElement('div', { className: classNameDot }),
 	        this.props.noteName
 	      )
 	    );

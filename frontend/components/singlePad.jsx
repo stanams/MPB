@@ -22,26 +22,31 @@ var SinglePad = React.createClass({
     return keys.indexOf(this.props.noteName) !== -1;
   },
 
+  // handleClick: function () {
+  //   var keys = KeyStore.all();
+  //   return keys.indexOf(this.props.noteName) !== -1;
+  // },
+
   _onChange: function () {
-   var pressed = this.handleKeyPressed();
-   if (pressed) {
-     this.note.start();
-   } else {
-     this.note.stop();
-   }
-   this.setState({ pressed: pressed });
-  },
+    // var clicked = this.handleClick();
+
+    var pressed = this.handleKeyPressed();
+     if (pressed) {
+       this.note.start();
+     } else {
+       this.note.stop();
+     }
+     this.setState({ pressed: pressed });
+    },
 
   render: function(){
-    var className = "note-key";
-    // if(this.state.pressed){
-    //  className += " pressed";
-    // }
-
+    var classNameNote = this.state.pressed ? "note-key-pressed" : "note-key";
+    var classNameDot = this.state.pressed ? "lightening-dot-pressed" : "lightening-dot";
+    var classNameContainer = this.state.pressed ? "container-single-pad-pressed" : "container-single-pad";
    return (
-     <div className="container-single-pad">
-       <div className={className}>
-         <div className="lightening-dot"></div>
+     <div className={classNameContainer}>
+       <div className={classNameNote}>
+         <div className={classNameDot}></div>
          {this.props.noteName}
        </div>
      </div>
