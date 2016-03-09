@@ -416,3 +416,11 @@ table {
 .note-key:active .lightening-dot {
 	background-color: red;
 }
+
+
+/*Bass attempt*/
+.first-chord {
+	width: 200px;
+	height: 2px;
+	border: 3px black solid;
+}

@@ -1,6 +1,6 @@
 var React = require('react');
 var KeyStore = require('../stores/keyStore');
-var Note = require('../util/samples');
+var Note = require('../util/notes');
 var TONES = require('../constants/tones');
 
 var SinglePad = React.createClass({

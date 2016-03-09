@@ -19747,7 +19747,7 @@
 
 	var React = __webpack_require__(1);
 	var KeyStore = __webpack_require__(162);
-	var Note = __webpack_require__(163);
+	var Note = __webpack_require__(193);
 	var TONES = __webpack_require__(164);
 	
 	var SinglePad = React.createClass({
@@ -19858,47 +19858,7 @@
 	module.exports = KeyStore;
 
 /***/ },
-/* 163 */
-/***/ function(module, exports) {
-
-	var ctx = new (window.AudioContext || window.webkitAudioContext)();
-	
-	var createOscillator = function (freq) {
-	  var osc = ctx.createOscillator();
-	  osc.type = "sine";
-	  osc.frequency.value = freq;
-	  osc.detune.value = 0;
-	  osc.start(ctx.currentTime);
-	  return osc;
-	};
-	
-	var createGainNode = function () {
-	  var gainNode = ctx.createGain();
-	  gainNode.gain.value = 0;
-	  gainNode.connect(ctx.destination);
-	  return gainNode;
-	};
-	
-	var Note = function (freq) {
-	  this.oscillatorNode = createOscillator(freq);
-	  this.gainNode = createGainNode();
-	  this.oscillatorNode.connect(this.gainNode);
-	};
-	
-	Note.prototype = {
-	  start: function () {
-	    // can't explain 0.3, it is a reasonable value
-	    this.gainNode.gain.value = 0.3;
-	  },
-	
-	  stop: function () {
-	    this.gainNode.gain.value = 0;
-	  }
-	};
-	
-	module.exports = Note;
-
-/***/ },
+/* 163 */,
 /* 164 */
 /***/ function(module, exports) {
 
@@ -36688,6 +36648,47 @@
 	
 	module.exports = FluxMixinLegacy;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 193 */
+/***/ function(module, exports) {
+
+	var ctx = new (window.AudioContext || window.webkitAudioContext)();
+	
+	var createOscillator = function (freq) {
+	  var osc = ctx.createOscillator();
+	  osc.type = "sine";
+	  osc.frequency.value = freq;
+	  osc.detune.value = 0;
+	  osc.start(ctx.currentTime);
+	  return osc;
+	};
+	
+	var createGainNode = function () {
+	  var gainNode = ctx.createGain();
+	  gainNode.gain.value = 0;
+	  gainNode.connect(ctx.destination);
+	  return gainNode;
+	};
+	
+	var Note = function (freq) {
+	  this.oscillatorNode = createOscillator(freq);
+	  this.gainNode = createGainNode();
+	  this.oscillatorNode.connect(this.gainNode);
+	};
+	
+	Note.prototype = {
+	  start: function () {
+	    // can't explain 0.3, it is a reasonable value
+	    this.gainNode.gain.value = 0.3;
+	  },
+	
+	  stop: function () {
+	    this.gainNode.gain.value = 0;
+	  }
+	};
+	
+	module.exports = Note;
 
 /***/ }
 /******/ ]);
